@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout :: main-fragment(
+                                                                     ~{:: title},
+                                                                    'header',
+                                                                    'footer',
+                                                                     ~{:: #css-resources},
+                                                                     ~{:: #js-resources},
+                                                                     ~{:: #main-content}
+                                                                    )}">
+<head>
+    <meta charset="UTF-8">
+    <title>Liên hệ</title>
+    <th:block id="css-resources">
+
+    </th:block>
+</head>
+<body>
+<main class="main" id="main-content">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/"><i class="icon-home"></i></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Liên hệ</li>
+            </ol>
+        </div><!-- End .container -->
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="contact-info" style="color: black">
+                    <br>
+                    <h3 class="light-title"><strong> THÔNG TIN LIÊN HỆ</strong></h3>
+                    <strong>CỬA HÀNG GIÀY DÉP THỂ THAO THỜI TRANG DTNSHOP</strong>
+                    <ul>
+                        <li>Địa chỉ: Đình Xuyên, Gia Lâm, Hà Nội</li>
+                        <li>Email: dtnshop@gmail.com</li>
+                        <li>Hotline: 035 483 8756</li>
+                        <li>Mở cửa: 09:00~21:00 T2-CN</li>
+                    </ul>
+                    <div>
+                        <a class="text-reset" href="https://maps.app.goo.gl/fi4xSmjUqxaybFx88" target="_blank" rel="noopener">
+<!--                            <button class="btn-dark" style="border-radius: 5px; "><i style="background-color: transparent" class='fas fa-map-marker-alt'></i></button>-->
+                            <button class="btn-dark" style="border-radius: 5px; "><i style="background-color: transparent" class='fas fa-map-marker-alt'></i></button>
+                        </a>
+                    </div>
+                </div><!-- End .contact-info -->
+            </div><!-- End .col-md-4 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+
+    <div class="mb-8"></div><!-- margin -->
+</main><!-- End .main -->
+<th:block id="js-resources">
+
+</th:block>
+</body>
+</html>

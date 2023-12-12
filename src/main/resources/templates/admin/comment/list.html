@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout_admin :: main-fragment(
+                                                ~{:: title},
+                                                'header',
+                                                'sidebar',
+                                                ~{:: #css-resources},
+                                                ~{:: #js-resources},
+                                                ~{:: #main-content}
+                                               )}">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách bình luận</title>
+    <th:block id="css-resources">
+        <link rel="stylesheet" th:href="@{/adminlte/pagination/simplePagination.css}">
+    </th:block>
+</head>
+<body>
+<section role="main" class="content-body" id="main-content">
+    <header class="page-header">
+        <div class="right-wrapper text-right">
+            <ol class="breadcrumbs">
+                <li>
+                    <a href="/admin">
+                        <i class="bx bx-home-alt"></i>
+                    </a>
+                </li>
+                <li><span>Danh sách bình luận</span></li>
+            </ol>
+            <a class="sidebar-right-toggle" data-open="sidebar-right"><i
+                    class="fas fa-chevron-left"></i></a>
+        </div>
+    </header>
+
+    <section class="card">
+        <header class="card-header">
+            <div class="card-actions">
+                <a href="#" class="card-action card-action-toggle" data-card-toggle></a>
+                <a href="#" class="card-action card-action-dismiss" data-card-dismiss></a>
+            </div>
+            <h2 class="card-title">Danh sách bình luận </h2>
+        </header>
+        <div class="card-body">
+            <!--      <div class="row">-->
+            <!--        <div class="col-sm-6">-->
+            <!--          <div class="mb-3">-->
+            <!--            <button id="addToTable" class="btn btn-primary">Thêm mới bình luận <i-->
+            <!--                    class="fas fa-plus"></i></button>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+            <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nội dung</th>
+                    <th>Ngày tạo</th>
+                    <th>Thao tác</th>
+                </tr>
+                <tr>
+                    <form method="GET" id="search-form">
+                        <th></th>
+                        <th><input type="text" name="content" id="content" class="form-control search-input"></th>
+                        <th></th>
+                        <th></th>
+                        <input type="hidden" name="page" id="page">
+                    </form>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="comment : ${comments}">
+                    <tr data-item-id="1">
+                        <td th:text="${comment.id}"></td>
+                        <td th:text="${comment.content}"></td>
+                        <td th:text="${#dates.format(comment.createdAt, 'dd-MM-yyyy')}"></td>
+                        <td class="actions">
+                            <!--                                    <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>-->
+                            <!--                                    <a href="#" class="hidden on-editing cancel-row"><i-->
+                            <!--                                            class="fas fa-times"></i></a>-->
+                            <!--                                    <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>-->
+                            <a href="#" class=" delete-comment" th:data-id="${comment.id}"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <br>
+            <!-- Pagination -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination" id="pagination"></ul>
+            </nav>
+        </div>
+    </section>
+
+</section>
+
+<th:block id="js-resources">
+    <script type="text/javascript" th:src="@{/adminlte/pagination/jquery.simplePagination.js}"></script>
+    <script type="text/javascript" th:src="@{/adminlte/js/table.js}"></script>
+    <script th:inline="javascript">
+        let content, page;
+
+        $(function () {
+            let vars = parseUrl();
+            content = vars["content"] || ""
+            page = vars["page"] || "1"
+
+            $('#content').val(content)
+            $('#page').val(page)
+
+            pagination([[${totalPages}]], [[${currentPage}]]);
+        });
+
+        $(".delete-comment").on("click",function (){
+            let id = $(this).data('id');
+            swal({
+                title: 'Bạn chắc chắn muốn xóa!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            }).then(function (rs){
+                if (rs.value){
+                    $.ajax({
+                        url:"/api/admin/comments/"+ id,
+                        type: "DELETE",
+                        success: function (data){
+                            toastr.success("Xóa bình luận thành công!");
+                            setTimeout(() => location.reload(), 500);
+                        },
+                        error: function (error){
+                            toastr.warning(error.responseJSON.message);
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/layout :: main-fragment(
+                                                                     ~{:: title},
+                                                                    'header',
+                                                                    'footer',
+                                                                     ~{:: #css-resources},
+                                                                     ~{:: #js-resources},
+                                                                     ~{:: #main-content}
+                                                                    )}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin giỏ hàng</title>
+    <!--    <th:block id="css-resources">-->
+    <style>
+        .main-content .nav {
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        }
+
+        @media (max-width: 767px) {
+            .main-content .nav {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow: scroll;
+            }
+            .main-content .nav-item {
+                white-space: nowrap;
+            }
+        }
+
+        .table-borderless tr {
+            margin: 12px 0;
+        }
+    </style>
+    <link rel="stylesheet" th:href="@{/shop/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/shop/css/bootstrap.min.css}">
+    <!--    </th:block>-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body>
+<main class="main" id="main-content">
+    <div class="cart-box-main">
+        <div class="container" th:if="${!cartProductList.isEmpty()}">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr style="margin: 12px 0">
+                                <th colspan="2">Sản phẩm</th>
+                                <th class="text-center">Đơn Giá</th>
+                                <th class="text-center">Số Lượng</th>
+                                <th class="text-center">Thành Tiền</th>
+                                <th class="text-center">Thao Tác</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="cartItem : ${cartProductList}">
+                                <td class="thumbnail-img">
+                                    <img class="img-thumbnail" width="100" height="100"
+                                         th:src="*{cartItem.product.images[0]}" alt=""/>
+                                </td>
+                                <td class="name-pr" style="vertical-align: middle !important;" >
+                                    <p th:text="${cartItem.product.name}"></p>
+                                    Size: <p style="display: inline-block" th:text="${cartItem.size}"></p>
+                                </td>
+                                <td class="price-pr text-center" style="vertical-align: middle !important;">
+                                    <p th:text="'₫' + ${#numbers.formatDecimal(cartItem.product.getSalePrice(), 0, 'COMMA', 0, 'POINT')}"></p>
+                                </td>
+                                <form th:action="@{/update-cart}" method="post">
+                                    <input hidden="hidden" name="id" th:value="${cartItem.id}">
+                                    <td scope="col" class="col-2 text-center" style="vertical-align: middle !important;"><input th:id="${cartItem.id}" type="number" min="0" step="1" name="quantity" th:value="${cartItem.quantity}" style="text-align: center; margin-bottom: 15px;" class="form-control-lg text col-5" >
+
+                                        <button style="text-align: center; margin-bottom: 15px; padding: 0px; border-radius: 3px; border: none; cursor: pointer" type="submit">
+                                            &nbsp;<i class="icon-pencil"></i>&nbsp;
+                                        </button>
+
+                                    </td>
+                                    <td class="total-pr middle text-center" style="vertical-align: middle !important;">
+                                        <p th:text="'₫' + ${#numbers.formatDecimal(cartItem.totalPrice, 0, 'COMMA', 0, 'POINT')}"></p>
+                                    </td>
+                                    <td class="remove-pr middle text-center" style="vertical-align: middle !important;">
+                                        <a th:href="@{/delete-cartItem/__${cartItem.id}__}" class="delete-cart" th:data-id="${cartItem.id}">
+                                            <button style="text-align: center; margin-bottom: 15px; padding: 3px; border-radius: 3px; border: none; cursor: pointer" type="button" name="action" value="delete">
+                                                &nbsp;<i class="far fa-trash-alt"></i>&nbsp;
+                                            </button>
+                                        </a>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-1"><br>
+            <div>
+                <a th:href="@{/delete-cartItem}" class="delete-cart">
+                    <button class="btn-danger" style="text-align: center; margin-bottom: 15px; padding: 5px; border-radius: 3px; border: none; cursor: pointer" type="button" name="action" value="delete">
+                        &nbsp;<i class="far fa-trash-alt"></i>&nbsp;&nbsp;Xoá giỏ hàng&nbsp;
+                    </button>
+                </a>
+            </div>
+            <div class="row my-5">
+                <div class="col-lg-8 col-sm-12"></div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-box">
+                        <h3>ĐƠN HÀNG</h3>
+                        <hr class="my-1">
+                        <div class="d-flex">
+                            <h5>Tổng tiền hàng</h5>
+                            <div class="ml-auto font-weight-bold" th:text = " '₫' + ${#numbers.formatDecimal(shoppingCart.getTotalPrices(), 0, 'COMMA', 0, 'POINT')}"> </div>
+                        </div>
+                        <div class="d-flex">
+                            <h5>Phí vận chuyển</h5>
+                            <div class="ml-auto font-weight-bold"> ₫0</div>
+                        </div>
+                        <div class="d-flex gr-total">
+                            <h4>Tổng thanh toán</h4>
+                            <div class="ml-auto font-weight-bold" th:text = " '₫' + ${#numbers.formatDecimal(shoppingCart.getTotalPrices(), 0, 'COMMA', 0, 'POINT')}"> </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex">
+                            <span><i>* Thanh toán khi nhận hàng</i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-3" th:if="${cartProductList.isEmpty()}">
+            <div >
+                <h5>Giỏ hàng của bạn còn trống</h5>
+            </div>
+        </div>
+
+        <div class="text-center mt-3" >
+            <br>
+            <a th:if="${cartProductList.isEmpty()}" style="border-radius: 3px" th:href="@{/}" class="btn btn-primary rounded-pill ">VỀ TRANG CHỦ</a>
+            <a style="border-radius: 3px" th:href="@{/san-pham}" class="btn btn-info rounded-pill ">ĐI TỚI CỬA HÀNG</a>
+            <a th:if="${!cartProductList.isEmpty()}" style="border-radius: 3px" th:href="@{/checkout}" class="btn btn-primary rounded-pill">ĐẶT HÀNG</a>
+            <hr>
+        </div>
+    </div>
+</main>
+<th:block id="js-resources">
+    <script th:src="@{/shop/js/size-choose.js}"></script>
+    <script th:src="@{/shop/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/shop/js/jquery.min.js}"></script>
+    <script th:src="@{/shop/js/plugins.min.js}"></script>
+</th:block>
+</body>
+</html>
