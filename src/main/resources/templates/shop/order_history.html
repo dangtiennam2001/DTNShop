@@ -48,6 +48,9 @@
                     <a class="account nav-item" href="/tai-khoan">Quản lý tài khoản</a>
                     <a class="buying-order nav-item" href="/tai-khoan/lich-su-giao-dich">Quản lý đơn hàng</a>
                     <a class="buying-order nav-item" href="/cart">Quản lý giỏ hàng</a>
+                    <th:block th:if="${user_email}=='admin@gmail.com'">
+                        <a class="btn btn-success red-btn sign-out-btn" href="/admin">Trang quản trị</a>
+                    </th:block>
                     <a class="btn btn-primary red-btn sign-out-btn" href="/api/logout">Đăng xuất</a>
                 </div>
             </div>
@@ -59,8 +62,9 @@
                         <li class="nav-item"><div class="nav-link active order-status" data-status="1">Chờ lấy hàng</div></li>
                         <li class="nav-item"><div class="nav-link order-status" data-status="2">&Dstrok;ang giao h&agrave;ng</div></li>
                         <li class="nav-item"><div class="nav-link order-status" data-status="3">&Dstrok;&atilde; giao h&agrave;ng</div></li>
-                        <li class="nav-item"><div class="nav-link order-status" data-status="4">&Dstrok;ơn hàng đã trả lại</div></li>
                         <li class="nav-item"><div class="nav-link order-status" data-status="5">Đơn hàng đã hủy</div></li>
+                        <li class="nav-item"><div class="nav-link order-status" data-status="4">&Dstrok;ơn hàng đã trả lại</div></li>
+
                     </ul>
                 </div>
                 <div class="tab-content" id="pills-tabContent">
@@ -75,7 +79,10 @@
 
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <div><b>Tổng thanh toán: </b> <span class="text-price" th:text="${item.totalPrice}"></span> &#x20AB;</div>
+                                    <div>
+                                        <b>Ngày đặt hàng: &nbsp;&nbsp;&nbsp;&nbsp;</b><span class="text" th:text="${item.createdAt}"></span><br>
+                                        <b>Tổng thanh toán: </b><span class="text-price" th:text="${item.totalPrice}"></span>&#x20AB;
+                                    </div>
                                     <div class="ml-auto"><a class="full-details" th:href="@{/tai-khoan/lich-su-giao-dich/{id}(id=${item.id})}">Xem chi tiết</a></div>
                                 </div>
                             </div>
@@ -137,7 +144,10 @@
 
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <div><b>Tổng thanh toán: </b> <span class="text-price">${order.totalPrice}</span> &#x20AB;</div>
+                                    <div>
+                                        <b>Ngày đặt hàng: </b>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text">${order.createdAt}</span><br>
+                                        <b>Tổng thanh toán: </b><span class="text-price">${order.totalPrice}</span>&#x20AB;
+                                    </div>
                                     <div class="ml-auto"><a class="full-details" href="/tai-khoan/lich-su-giao-dich/${order.id}">Xem chi tiết</a></div>
                                 </div>
                             </div>
@@ -154,7 +164,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="price bid-price"><span class="text-price">${order.totalPrice}</span> &#x20AB;</div>
+                                    <div class="price bid-price"><span class="text-price">${order.totalPrice}</span>&#x20AB;</div>
                                 </div>
                             </div>
         `

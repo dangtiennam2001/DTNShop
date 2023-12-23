@@ -34,6 +34,8 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(Model model, Principal principal, HttpSession session){
+        if(principal==null) return "redirect:";
+
         String username = principal.getName();
         User user = userService.findByEmail(username);
         Cart cart = user.getCart();

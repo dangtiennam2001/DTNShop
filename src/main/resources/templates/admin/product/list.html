@@ -43,15 +43,15 @@
         </header>
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <div class="mb-3">
-                        <a href="/admin/products/create" id="addToTable" class="btn btn-info">Thêm mới sản phẩm <i
+                        <a href="/admin/products/create" id="addToTable" class="btn btn-success">Thêm mới sản phẩm <i
                                 class="fas fa-plus"></i></a>
-                        <a href="/admin/products" class="btn btn-primary">Refresh <i
-                                class="fas fa-redo-alt"></i></a>
-                        <button id="btn-search" class="btn btn-success">Tìm kiếm <i
+                        <button id="btn-search" class="btn btn-info">Tìm kiếm <i
                                 class="fas fa-search"></i></button>
-                        <button class="btn btn-warning btn_export"><a th:href="@{/api/products/export/excel}">Xuất dữ liệu</a>
+                        <a href="/admin/products" class="btn btn-warning">Refresh <i
+                                class="fas fa-redo-alt"></i></a>
+                        <button class="btn btn-secondary btn_export"><a th:href="@{/api/products/export/excel}" style="color: #FFFFFF!important;" onmouseover="this.style.textDecoration='none'">Xuất dữ liệu</a>
                             <i class="fas fa-file-export"></i></button>
 <!--                        <button id="btn-delete" onclick="warningBeforeDelete()" type="button" class="btn btn-danger" disabled>Xóa sản phẩm  <i-->
 <!--                                class="fas fa-trash-alt"></i></button>-->
@@ -228,7 +228,7 @@
                         url:"/api/admin/products/"+ id,
                         type: "DELETE",
                         success: function (data){
-                            toastr.success("Xóa danh mục thành công!");
+                            toastr.success("Xóa sản phẩm thành công!");
                             setTimeout(() => location.reload(), 500);
                         },
                         error: function (error){

@@ -96,17 +96,17 @@
 
                     <div style="color: #DD3333">
                         <th:block th:if="${product.promotionPrice}">
-                            <span class="product-price price-box text-price" style="color: #DD3333" id="in-promotion-value" th:text="${product.promotionPrice}"> </span> <span>&#x20AB;&nbsp;</span>
-                            <del class="old-price text-price " id="in-total-price" th:text="${product.price}"></del> <span style="color: #777">&#x20AB;</span>
+                            <span class="product-price price-box text-price" style="color: #DD3333" id="in-promotion-value" th:text="${product.promotionPrice}"></span><span>&#x20AB;&nbsp;</span>
+                            <del class="old-price text-price " id="in-total-price" th:text="${product.price}"></del><span style="color: #777">&#x20AB;</span>
                         </th:block>
                         <th:block th:unless="${product.promotionPrice}">
-                            <span class="product-price price-box text-price" style="color: #DD3333" th:text="${product.price}"></span> &#x20AB;
+                            <span class="product-price price-box text-price" style="color: #DD3333" th:text="${product.price}"></span>&#x20AB;
                         </th:block>
                     </div><!-- End .price-box -->
                     <hr class="divider">
                     <div class="product-desc" style="color: black">
                         <span class="desc-sub-title">Đã bán: </span>
-                        <span th:text="${product.totalSold} + ' đôi'"></span>
+                        <span th:text="${product.totalSold} + ' sản phẩm'"></span>
                     </div>
                     <hr class="divider">
                     <div class="product-desc" style="color: black">
@@ -129,12 +129,12 @@
                                 <div class="ask-text left-content">
                                     <th:block th:if="${product.promotionPrice}">
                                         <div class="ask-desc sub-content" style="color: white">Giá bán ưu đãi</div>
-                                        <div class="ask-desc sub-content old-price" style="color: white"><span class="text-price" th:text="${product.price}"></span> &#x20AB;</div>
-                                        <div class="ask-price "><span class="text-price" th:text="${product.promotionPrice}"></span> &#x20AB;</div>
+                                        <div class="ask-desc sub-content old-price" style="color: white"><span class="text-price" th:text="${product.price}"></span>&#x20AB;</div>
+                                        <div class="ask-price "><span class="text-price" th:text="${product.promotionPrice}"></span>&#x20AB;</div>
                                     </th:block>
                                     <th:block th:unless="${product.promotionPrice}">
                                         <div class="ask-desc sub-content" style="color: white">Giá bán</div>
-                                        <div class="ask-price "><span class="text-price" th:text="${product.price}"></span> &#x20AB;</div>
+                                        <div class="ask-price "><span class="text-price" th:text="${product.price}"></span>&#x20AB;</div>
                                     </th:block>
                                 </div>
                                 <div class="buy-text right-content border-0" style="background-color: #23232c!important;">

@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import static com.tiennam.application.config.Contant.DISCOUNT_AMOUNT;
 import static com.tiennam.application.config.Contant.DISCOUNT_PERCENT;
 
 @Component
@@ -132,6 +133,11 @@ public class PromotionServiceImpl implements PromotionService {
         promotion.setDiscountType(createPromotionRequest.getDiscountType());
         promotion.setDiscountValue(createPromotionRequest.getDiscountValue());
         if (createPromotionRequest.getDiscountType() == DISCOUNT_PERCENT) {
+            promotion.setMaximumDiscountValue(createPromotionRequest.getMaxValue());
+        } else {
+            promotion.setDiscountValue(createPromotionRequest.getDiscountValue());
+        }
+        if (createPromotionRequest.getDiscountType() == DISCOUNT_AMOUNT) {
             promotion.setMaximumDiscountValue(createPromotionRequest.getMaxValue());
         } else {
             promotion.setDiscountValue(createPromotionRequest.getDiscountValue());

@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 import static com.tiennam.application.config.Contant.*;
@@ -140,6 +141,7 @@ public class OrderController {
         //Get list order pending
         User user =((CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
         List<OrderInfoDTO> orderList = orderService.getListOrderOfPersonByStatus(ORDER_STATUS,user.getId());
+        Collections.reverse(orderList);
         model.addAttribute("orderList",orderList);
 
         return "shop/order_history";
@@ -154,6 +156,7 @@ public class OrderController {
 
         User user = ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
         List<OrderInfoDTO> orders = orderService.getListOrderOfPersonByStatus(status, user.getId());
+        Collections.reverse(orders);
 
         return ResponseEntity.ok(orders);
     }

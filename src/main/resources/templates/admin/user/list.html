@@ -89,14 +89,23 @@
 <!--                        <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>-->
 <!--                        <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>-->
 <!--                    </td>-->
+
+<!--                        <td class="actions">-->
+<!--                            <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" >-->
+<!--                                <button style="text-align: center; margin-bottom: 15px; padding: 0px; border-radius: 3px; border: none; cursor: pointer" type="button" name="action" value="delete" title="Delete">-->
+<!--                                    &nbsp;<i class="far fa-trash-alt"></i>&nbsp;-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                        </td>-->
+
                         <td class="actions">
-                            <a th:href="@{/admin/users/delete/{id}(id=${user.id})}" >
+                            <a href="#" th:data-id="${user.id}" class="on-default remove-row delete-user">
                                 <button style="text-align: center; margin-bottom: 15px; padding: 0px; border-radius: 3px; border: none; cursor: pointer" type="button" name="action" value="delete" title="Delete">
                                     &nbsp;<i class="far fa-trash-alt"></i>&nbsp;
                                 </button>
                             </a>
                         </td>
-                </tr>
+                    </tr>
                 </th:block>
                 </tbody>
             </table>
@@ -132,6 +141,32 @@
 
             pagination([[${totalPages}]], [[${currentPage}]]);
         });
+
+        $(".delete-user").on("click",function (){
+            let id = $(this).data('id');
+            swal({
+                title: 'Bạn chắc chắn muốn xóa!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            }).then(function (rs){
+                if (rs.value){
+                    $.ajax({
+                        url:"/api/admin/users/"+ id,
+                        type: "DELETE",
+                        success: function (data){
+                            toastr.success("Xóa người dùng thành công!");
+                            setTimeout(() => location.reload(), 300);
+                        },
+                        error: function (error){
+                            toastr.warning(error.responseJSON.message);
+                        }
+                    })
+                }
+            })
+        })
     </script>
 </th:block>
 </body>

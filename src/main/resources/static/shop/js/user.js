@@ -6,7 +6,7 @@ $(document).ready(function () {
             login_email: {
                 required: true,
                 email: true,
-                maxlength: 50
+                maxlength: 25
             },
             login_password: {
                 required: true,

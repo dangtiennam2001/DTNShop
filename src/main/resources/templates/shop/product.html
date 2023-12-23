@@ -67,13 +67,13 @@
                                     <div class="price-box">
                                         <th:block th:if="${product.promotionPrice}">
                                             <span class="product-price" style="color: #DD3333"
-                                                  th:text="${#numbers.formatDecimal(product.promotionPrice, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #DD3333">&#x20AB;&nbsp;</span>
+                                                  th:text="${#numbers.formatDecimal(product.promotionPrice, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #DD3333">&#x20AB;</span>
                                             <del class="old-price"
-                                                 th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"><span>&#x20AB;</span></del>
+                                                 th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')+'₫'}"></del>
                                         </th:block>
                                         <th:block th:unless="${product.promotionPrice}">
                                             <span class="product-price" style="color: #DD3333"
-                                                  th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"><span>&#x20AB;</span></span>
+                                                  th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #DD3333">&#x20AB;</span>
                                         </th:block>
                                     </div><!-- End .price-box -->
                                 </div><!-- End .product-details -->
@@ -364,10 +364,10 @@
                                     <div class="price-box">`
                     if (product.promotionPrice > 0) {
                         html += `
-                              <span class="product-price text-price" >${product.promotionPrice}</span> &#x20AB;
-                              <del class="old-price text-price" >${product.price}</del> &#x20AB;`
+                              <span class="product-price text-price" style="color: #DD3333">${product.promotionPrice}</span><span style="color: #DD3333">&#x20AB;</span>
+                              <del class="old-price text-price" >${product.price}</del> <span>&#x20AB;</span>`
                     } else {
-                        html += `<span class="product-price text-price">${product.price}</span> &#x20AB;`
+                        html += `<span class="product-price text-price" style="color: #DD3333">${product.price}</span><span style="color: #DD3333">&#x20AB;</span>`
                     }
                     html += `
                                     </div>

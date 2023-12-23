@@ -44,22 +44,22 @@
 						}
 					}
 				}">
-            <div class="info-box info-box-icon-left">
+            <div class="info-box info-box-icon-left" style="border-right: 1px solid #868686">
                 <i class="icon-shipping"></i>
 
                 <div class="info-box-content">
-                    <h4>GIAO HÀNG NHANH</h4>
-                    <p class="text-body">Giao hàng nhanh trong 1-2 ngày <br>
+                    <h4>VẬN CHUYỂN TOÀN QUỐC</h4>
+                    <p class="text-body">Vận chuyển nhanh trong 2-5 ngày <br>
                         Miễn phí vận chuyển</p>
                 </div><!-- End .info-box-content -->
             </div><!-- End .info-box -->
 
-            <div class="info-box info-box-icon-left">
+            <div class="info-box info-box-icon-left" style="border-right: 1px solid #868686">
                 <i class="icon-money"></i>
 
                 <div class="info-box-content">
                     <h4>CAM KẾT CHẤT LƯỢNG</h4>
-                    <p class="text-body">Hoàn tiền 100% nếu khách hàng phát hiện <br>sản phẩm kém chất lượng</p>
+                    <p class="text-body">Bảo hành & đổi trả mới 100% <br>nếu có lỗi do nhà sản xuất</p>
                 </div><!-- End .info-box-content -->
             </div><!-- End .info-box -->
 
@@ -67,26 +67,31 @@
                 <i class="icon-support"></i>
 
                 <div class="info-box-content">
-                    <h4>HỖ TRỢ 24/7</h4>
-                    <p class="text-body">Tư vấn tận tình, hỗ trợ đổi hàng</p>
+                    <h4>HỖ TRỢ & TƯ VẤN 24/7</h4>
+                    <p class="text-body">Hỗ trợ đổi hàng, tư vấn nhiệt tình <br>Gọi ngay 035 483 8756</p>
                 </div><!-- End .info-box-content -->
             </div><!-- End .info-box -->
         </div><!-- End .info-boxes-slider -->
     </div><!-- End .container -->
 
-    <section class="featured-products-section">
+    <section class="new-products-section">
         <div class="container">
-            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm mới về</h2>
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm&nbsp;<span style="color: #FFFFFF; background-color: #378C17">&nbsp;mới về&nbsp;</span></h2>
 
             <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
 						'dots': false,
-						'nav': true
+						'nav': true,
+						'responsive': {
+							'992': {
+								'items': 5
+							}
+						}
 					}">
                 <th:block th:each="newProduct :${newProducts}">
                     <div class="product-default">
                     <figure>
                         <a th:href="@{/{slug}/{id}(id=${newProduct.id},slug=${newProduct.slug})}">
-                            <img th:src="@{${newProduct.images}}" alt="product">
+                            <img th:src="@{${newProduct.images}}" alt="product" style="border: 1px solid #e5e5e5">
                         </a>
                         <div class="label-group">
                             <div class="product-label label-hot">NEW</div>
@@ -99,7 +104,7 @@
                         <div class="price-box">
                             <th:block th:if="${newProduct.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(newProduct.promotionPrice, 0, 'COMMA', 0, 'POINT')}"></span></span><span style="color: #DD3333">&#x20AB;&nbsp;</span>
-                                <del class="old-price" th:text="${#numbers.formatDecimal(newProduct.price, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #777">&#x20AB;</span></del>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(newProduct.price, 0, 'COMMA', 0, 'POINT')+'₫'}"></span></del>
                             </th:block>
                             <th:block th:unless="${newProduct.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(newProduct.price, 0, 'COMMA', 0, 'POINT')}"></span></span><span style="color: #DD3333">&#x20AB;</span>
@@ -124,7 +129,7 @@
 
     <section class="new-products-section">
         <div class="container">
-            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm bán chạy</h2>
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm&nbsp;<span style="color: #FFFFFF; background-color: #006CAA">&nbsp;bán chạy&nbsp;</span></h2>
 
             <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
 						'dots': false,
@@ -139,10 +144,10 @@
                     <div class="product-default">
                     <figure>
                         <a th:href="@{/{slug}/{id}(id=${sell.id},slug=${sell.slug})}">
-                            <img th:src="@{${sell.images}}" alt="product">
+                            <img th:src="@{${sell.images}}" alt="product" style="border: 1px solid #e5e5e5">
                         </a>
                         <div class="label-group">
-                            <div class="product-label label-hot" style="background-color: #00CCFF">BEST-SELLER</div>
+                            <div class="product-label label-hot" style="background-color: #00a2e3">BEST-SELLER</div>
                         </div>
                     </figure>
                     <div class="product-details">
@@ -152,16 +157,15 @@
                         <div class="price-box">
                             <th:block th:if="${sell.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(sell.promotionPrice, 0, 'COMMA', 0, 'POINT')}"></span></span><span style="color: #DD3333">&#x20AB;&nbsp;</span>
-                                <del class="old-price" th:text="${#numbers.formatDecimal(sell.price, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #777">&#x20AB;</span></del>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(sell.price, 0, 'COMMA', 0, 'POINT')+'₫'}"></span></del>
                             </th:block>
                             <th:block th:unless="${sell.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(sell.price, 0, 'COMMA', 0, 'POINT')}"></span></span><span style="color: #DD3333">&#x20AB;</span>
                             </th:block>
                         </div><!-- End .price-box -->
-<!--                        <div class="ratings-container">-->
-<!--                            <p class="card-text sold">&Dstrok;&atilde; b&aacute;n <span th:text="${sell.totalSold}"></span> &dstrok;&ocirc;i</p>-->
-<!--                        </div>&lt;!&ndash; End .product-container &ndash;&gt;-->
-<!--                        -->
+                        <div class="ratings-container">
+                            <p class="card-text sold">Đã bán <span th:text="${sell.totalSold}"></span></p>
+                        </div><!-- End .product-container -->
 
 <!--                        <div class="product-action">-->
 <!--                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>-->
@@ -175,22 +179,27 @@
         </div>
     </section>
 
-    <section class="featured-products-section">
+    <section class="new-products-section">
         <div class="container">
-            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm hot</h2>
+            <h2 class="section-title heading-border ls-20 border-0">Sản phẩm&nbsp;<span style="color: #FFFFFF; background-color: #BF2614">&nbsp;hot nhất&nbsp;</span></h2>
 
             <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center" data-owl-options="{
 						'dots': false,
-						'nav': true
+						'nav': true,
+						'responsive': {
+							'992': {
+								'items': 5
+							}
+						}
 					}">
                 <th:block th:each="view : ${viewProducts}">
                     <div class="product-default">
                     <figure>
                         <a th:href="@{/{slug}/{id}(id=${view.id},slug=${view.slug})}">
-                            <img th:src="@{${view.images}}" alt="product">
+                            <img th:src="@{${view.images}}" alt="product" style="border: 1px solid #e5e5e5">
                         </a>
                         <div class="label-group">
-                            <div class="product-label label-hot" style="background-color: #BF2614">HOT</div>
+                            <div class="product-label label-hot" style="background-color: #ff3a3a">HOT</div>
                         </div>
                     </figure>
                     <div class="product-details">
@@ -200,7 +209,7 @@
                         <div class="price-box">
                             <th:block th:if="${view.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(view.promotionPrice, 0, 'COMMA', 0, 'POINT')}"></span><span style="color: #DD3333">&#x20AB;&nbsp;</span>
-                                <del class="old-price" th:text="${#numbers.formatDecimal(view.price, 0, 'COMMA', 0, 'POINT')}"><span style="color: #777">&#x20AB;</span></del>
+                                <del class="old-price" th:text="${#numbers.formatDecimal(view.price, 0, 'COMMA', 0, 'POINT')+'₫'}"></del>
                             </th:block>
                             <th:block th:unless="${view.promotionPrice}">
                                 <span class="product-price" style="color: #DD3333" th:text="${#numbers.formatDecimal(view.price, 0, 'COMMA', 0, 'POINT')}"></span></span><span style="color: #DD3333">&#x20AB;</span>
@@ -211,7 +220,7 @@
 <!--                        </div>&lt;!&ndash; End .product-container &ndash;&gt;-->
 <!--                        -->
                         <div class="ratings-container">
-                            <p class="card-text sold">Số lượt xem: <span th:text="${view.views}"></span></p>
+                            <p class="card-text sold">Lượt xem <span th:text="${view.views}"></span></p>
                         </div><!-- End .product-container -->
 <!--                        <div class="product-action">-->
 <!--                            <a href="#" class="btn-icon-wish"><i class="icon-heart"></i></a>-->
@@ -227,21 +236,22 @@
 
     <section class="blog-section">
         <div class="container">
-            <h2 class="section-title heading-border border-0 mb-2">Tin mới nhất</h2>
+            <h2 class="section-title heading-border border-0 mb-2"><span style="color: #FFFFFF; background-color: #A64C32">&nbsp;Tin mới nhất&nbsp;</span></h2>
 
-            <div class="owl-carousel owl-theme" data-owl-options="{
+            <div class="products-slider custom-products owl-carousel owl-theme nav-outer show-nav-hover nav-image-center owl-carousel owl-theme post-slider" data-owl-options="{
 						'loop': false,
 						'margin': 20,
 						'autoHeight': true,
 						'autoplay': false,
 						'dots': false,
 						'items': 2,
+						'nav': true,
 						'responsive': {
 							'576': {
 								'items': 3
 							},
 							'768': {
-								'items': 4
+								'items': 5
 							}
 						}
 					}">
@@ -251,7 +261,7 @@
                         <a th:href="@{/tin-tuc/{slug}/{id}(id=${post.id},slug=${post.slug})}">
                             <img th:src="@{${post.thumbnail}}" alt="Post" width="225" height="280">
                         </a>
-                        <div class="post-date">
+                        <div class="post-date" style="background-color: #986842">
                             <span th:text="${#dates.format(post.publishedAt, 'MM yyyy')}"></span></p>
                         </div>
                     </div><!-- End .post-media -->

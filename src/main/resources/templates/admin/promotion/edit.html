@@ -49,9 +49,9 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="mb-3">
-                        <a href="/admin/promotions" class="btn btn-primary"><i
+                        <a href="/admin/promotions" class="btn btn-secondary"><i
                                 class="fas fa-chevron-left"></i> Trở về</a>
-                        <button type="button" id="addToTable" class="btn btn-primary btn-update-promotion">Cập nhật khuyến mại <i
+                        <button type="button" id="addToTable" class="btn btn-info btn-update-promotion" style="background-color: #007bff">Cập nhật khuyến mại <i
                                 class="fas fa-plus"></i></button>
                         <button id="btn-delete" type="button" class="btn btn-danger btn-delete-promotion">Xóa khuyến mại <i
                                 class="fas fa-trash-alt"></i></button>
@@ -82,7 +82,7 @@
                                 <input type="text" class="form-control" id="name" th:value="${promotion.name}">
                             </div>
                             <div class="form-group">
-                                <label for="discount-type" class="required-label">Khuyến mãi theo</label>
+                                <label for="discount-type" class="required-label">Khuyến mại theo</label>
                                 <select class="form-control" id="discount-type">
                                     <option value="1" th:selected="${promotion.discountType} == 1">Phần trăm (%)</option>
                                     <option value="2" th:selected="${promotion.discountType} == 2">Khoản tiền trực tiếp</option>
@@ -118,14 +118,14 @@
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="ispublic"
                                            th:checked="${promotion.public}">
-                                    <label class="custom-control-label" for="ispublic">Công khai khuyến mãi</label>
+                                    <label class="custom-control-label" for="ispublic">Công khai khuyến mại</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="active"
                                            th:checked="${promotion.active}">
-                                    <label class="custom-control-label" for="active">Kích hoạt khuyến mãi</label>
+                                    <label class="custom-control-label" for="active">Kích hoạt khuyến mại</label>
                                 </div>
                             </div>
                         </div>

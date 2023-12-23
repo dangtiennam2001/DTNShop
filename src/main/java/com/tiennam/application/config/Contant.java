@@ -24,11 +24,11 @@ public class Contant {
     public static final int LIMIT_PRODUCT_NEW = 8;
     public static final int LIMIT_PRODUCT_VIEW = 8;
     public static final int LIMIT_PRODUCT_RELATED = 8;
-    public static final int LIMIT_PRODUCT_SHOP = 20;
-    public static final int LIMIT_PRODUCT_SEARCH = 20;
+    public static final int LIMIT_PRODUCT_SHOP = 15;
+    public static final int LIMIT_PRODUCT_SEARCH = 15;
 
     //Post
-    public static final int LIMIT_POST_NEW = 5;
+    public static final int LIMIT_POST_NEW = 8;
 
     //Size giày
     public static final List<Integer> SIZE_VN = new ArrayList<>(Arrays.asList(35, 36, 37, 38, 39, 40, 41, 42));

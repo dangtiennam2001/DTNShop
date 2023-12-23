@@ -8,7 +8,6 @@ import com.tiennam.application.exception.NotFoundException;
 import com.tiennam.application.model.request.FilterProductRequest;
 import com.tiennam.application.security.CustomUserDetails;
 import com.tiennam.application.service.*;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -288,37 +287,6 @@ public class HomeController {
         Order order = orderService.createOrder(createOrderRequest, user.getId());
         return ResponseEntity.ok(order.getId());
     }
-
-    @GetMapping("/get-test-product")
-    public String getTestProduct(Model model){
-        Order order = new Order();
-        model.addAttribute("order",order);
-        return "shop/testproductform";
-    }
-
-    @PostMapping ("/get-test-product")
-    public String postTestProduct(@ModelAttribute("order") Order order){
-        User user = ((CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
-        long userId = user.getId();
-        orderService.createOrder(order,userId);
-        return "shop/testproductform";
-    }
-
-//    @PostMapping("/get-test-product")
-//    public ResponseEntity<Order> postTestProduct(@RequestBody Order order, Principal principal) {
-//        String username = principal.getName();
-//        User user = userService.findByEmail(username);
-//        Order createdOrder = orderService.createOrder(order,user.getId());
-//        return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
-//    }
-
-
-
-
-
-
-
-
 
     @GetMapping("/products")
     public ResponseEntity<Object> getListBestSellProducts(){

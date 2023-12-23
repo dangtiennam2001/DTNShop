@@ -52,4 +52,11 @@ public class AdminUserController {
         userService.deleteUserById(id,cart.getUser().getId());
         return "redirect:/admin/users";
     }
+
+    @DeleteMapping("/api/admin/users/{id}")
+    public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
+        Cart cart = cartService.findByUserId(id);
+        userService.deleteUserById(id, cart.getUser().getId());
+        return ResponseEntity.ok("Xóa người dùng thành công!");
+    }
 }

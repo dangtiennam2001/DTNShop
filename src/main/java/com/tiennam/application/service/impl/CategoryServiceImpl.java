@@ -82,7 +82,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new NotFoundException("Danh mục không tồn tại!");
         }
         Category category = result.get();
-        category.setName(category.getName());
+        category.setName(createCategoryRequest.getName());
         category.setStatus(createCategoryRequest.isStatus());
         category.setModifiedAt(new Timestamp(System.currentTimeMillis()));
         try {
